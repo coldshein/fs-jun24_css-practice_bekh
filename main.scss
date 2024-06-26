@@ -59,10 +59,6 @@ body {
         transform: scale(1.2);
         z-index: 2;
 
-        &::after {
-            display: block;
-        }
-
         .extra {
             opacity: 1;
         }
