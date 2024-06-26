@@ -1,1 +1,145 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
 
+body {
+    font-size: 20px;
+    line-height: 1.15;
+    color: #2F4F4F;
+    box-sizing: border-box;
+}
+
+@mixin on-tablet {
+    @media (min-width: 750px) {
+        @content;
+    }
+}
+
+@mixin on-desktop {
+    @media (min-width: 1000px) {
+        @content;
+    }
+}
+
+@mixin grid-page {
+    display: grid;
+    --columns: 2;
+    column-gap: 10px;
+    grid-template-columns: repeat(var(--columns), 220px);
+    justify-content: center;
+    row-gap: 4px;
+
+    @include on-desktop {
+        --columns: 4;
+    }
+}
+
+.people {
+    @include grid-page;
+    padding: 30px 35px;
+}
+
+.person {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 10px 0 16px;
+
+    background-color: #fff;
+    border-radius: 10px;
+
+    transition: transform 0.1s;
+    transform-origin: center;
+
+    &:hover {
+        background-color: #eee;
+        transform: scale(1.2);
+        z-index: 2;
+
+        &::after {
+            display: block;
+        }
+
+        .extra {
+            opacity: 1;
+        }
+
+        .photo {
+            img {
+                border-radius: 60px;
+            }
+        }
+    }
+
+    .details {
+        text-align: center;
+    }
+
+    .sport::after {
+        content: ',';
+    }
+
+    .pay {
+        &::before {
+            content: '$';
+        }
+
+        &::after {
+            content: 'M';
+        }
+    }
+
+    .extra {
+        font-size: 18px;
+
+        margin-top: 9px;
+
+        opacity: 0;
+        color: #000;
+    }
+
+    .name {
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .photo {
+        position: relative;
+        z-index: 0;
+
+        margin-bottom: 8px;
+        padding: 0 10px;
+
+        height: 200px;
+        width: 200px;
+
+        img {
+            width: 100%;
+            object-fit: cover;
+
+            border-radius: 50%;
+
+            transition: border-radius 1s ease;
+        }
+
+        &>span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+
+            height: 32px;
+            width: 32px;
+
+            border-radius: 50%;
+            background-color: #fff;
+        }
+    }
+}
